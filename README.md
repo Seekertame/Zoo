@@ -67,6 +67,7 @@ Zoo/
 ## Запуск программы
 
 ```bash
+dotnet restore
 dotnet build
 dotnet run --project src/Zoo.Presentation.Console
 ```
