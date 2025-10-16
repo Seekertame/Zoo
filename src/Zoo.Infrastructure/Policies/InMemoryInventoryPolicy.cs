@@ -4,13 +4,10 @@ using Zoo.Application.Interfaces;
 
 namespace Zoo.Infrastructure.Policies;
 
-public sealed class InMemoryInventoryPolicy : IInventoryPolicy
+public sealed class InMemoryInventoryPolicy(IAnimalRepository animals, IThingRepository things) : IInventoryPolicy
 {
-    private readonly IAnimalRepository _animals;
-    private readonly IThingRepository _things;
-
-    public InMemoryInventoryPolicy(IAnimalRepository animals, IThingRepository things)
-    { _animals = animals; _things = things; }
+    private readonly IAnimalRepository _animals = animals;
+    private readonly IThingRepository _things = things;
 
     public async Task EnsureUniqueAsync(int number)
     {

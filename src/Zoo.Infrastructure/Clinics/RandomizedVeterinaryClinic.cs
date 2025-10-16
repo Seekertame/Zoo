@@ -3,7 +3,7 @@ using Zoo.Domain.Entities.Animals;
 
 namespace Zoo.Infrastructure.Clinics;
 
-// Простейшее правило: травоядных допускаем, хищников — если "рацион" не слишком велик.
+// Правило: травоядных допускаем, хищников — если "рацион" не слишком велик.
 public sealed class RandomizedVeterinaryClinic : IVeterinaryClinic
 {
     public AdmissionDecision Inspect(Animal candidate)

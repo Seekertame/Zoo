@@ -45,10 +45,10 @@ public class AdmissionServiceTests
     }
 
     // ===== fakes =====
-    private sealed class FixedClinic : IVeterinaryClinic
+    private sealed class FixedClinic(AdmissionDecision d) : IVeterinaryClinic
     {
-        private readonly AdmissionDecision _d;
-        public FixedClinic(AdmissionDecision d) => _d = d;
+        private readonly AdmissionDecision _d = d;
+
         public AdmissionDecision Inspect(Animal candidate) => _d;
     }
 

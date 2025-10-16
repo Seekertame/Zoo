@@ -7,31 +7,24 @@ using Zoo.Presentation.Console.UI.Printers;
 
 namespace Zoo.Presentation.Console.UI;
 
-public sealed class ConsoleApp
+public sealed class ConsoleApp(
+    Menu menu,
+    InputReader input,
+    IAdmissionService admission,
+    IReportService reports,
+    IThingService thingsService,
+    InventoryPrinter invPrinter,
+    TotalFoodPrinter foodPrinter,
+    ContactZooPrinter contactPrinter)
 {
-    private readonly Menu _menu;
-    private readonly InputReader _in;
-    private readonly IAdmissionService _admission;
-    private readonly IReportService _reports;
-    private readonly IThingService _thingService;
-    private readonly InventoryPrinter _invPrinter;
-    private readonly TotalFoodPrinter _foodPrinter;
-    private readonly ContactZooPrinter _contactPrinter;
-
-    public ConsoleApp(
-        Menu menu,
-        InputReader input,
-        IAdmissionService admission,
-        IReportService reports,
-        IThingService thingsService,
-        InventoryPrinter invPrinter,
-        TotalFoodPrinter foodPrinter,
-        ContactZooPrinter contactPrinter)
-    {
-        _menu = menu; _in = input;
-        _admission = admission; _reports = reports; _thingService = thingsService;
-        _invPrinter = invPrinter; _foodPrinter = foodPrinter; _contactPrinter = contactPrinter;
-    }
+    private readonly Menu _menu = menu;
+    private readonly InputReader _in = input;
+    private readonly IAdmissionService _admission = admission;
+    private readonly IReportService _reports = reports;
+    private readonly IThingService _thingService = thingsService;
+    private readonly InventoryPrinter _invPrinter = invPrinter;
+    private readonly TotalFoodPrinter _foodPrinter = foodPrinter;
+    private readonly ContactZooPrinter _contactPrinter = contactPrinter;
 
     public async Task RunAsync()
     {

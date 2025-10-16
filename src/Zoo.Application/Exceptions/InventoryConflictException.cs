@@ -1,8 +1,6 @@
 ﻿namespace Zoo.Application.Exceptions;
 
-public sealed class InventoryConflictException : Exception
+public sealed class InventoryConflictException(int number) : Exception($"Inventory number already exists: {number}")
 {
-    public int Number { get; }
-    public InventoryConflictException(int number)
-        : base($"Inventory number already exists: {number}") => Number = number;
+    public int Number { get; } = number;
 }

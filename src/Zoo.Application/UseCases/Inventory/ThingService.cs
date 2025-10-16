@@ -3,14 +3,11 @@ using Zoo.Domain.Entities.Things;
 
 namespace Zoo.Application.UseCases.Inventory;
 
-public sealed class ThingService : IThingService
+public sealed class ThingService(IThingRepository things, IInventoryPolicy policy, IUnitOfWork uow) : IThingService
 {
-    private readonly IThingRepository _things;
-    private readonly IInventoryPolicy _policy;
-    private readonly IUnitOfWork _uow;
-
-    public ThingService(IThingRepository things, IInventoryPolicy policy, IUnitOfWork uow)
-    { _things = things; _policy = policy; _uow = uow; }
+    private readonly IThingRepository _things = things;
+    private readonly IInventoryPolicy _policy = policy;
+    private readonly IUnitOfWork _uow = uow;
 
     public async Task AddAsync(Thing thing)
     {

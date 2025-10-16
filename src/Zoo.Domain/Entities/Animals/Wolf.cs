@@ -1,7 +1,5 @@
 ﻿namespace Zoo.Domain.Entities.Animals;
-public sealed class Wolf : Predator
+public sealed class Wolf(string name, int number, int foodKgPerDay) : Predator(name, number, foodKgPerDay)
 {
-    public Wolf(string name, int number, int foodKgPerDay)
-        : base(name, number, foodKgPerDay) { }
     public override string Species => "Wolf";
 }

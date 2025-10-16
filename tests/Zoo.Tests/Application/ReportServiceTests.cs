@@ -68,18 +68,18 @@ public class ReportServiceTests
     }
 
     // ===== fakes =====
-    private sealed class ListAnimalRepo : IAnimalRepository
+    private sealed class ListAnimalRepo(IEnumerable<Animal>? seed = null) : IAnimalRepository
     {
-        private readonly List<Animal> _list;
-        public ListAnimalRepo(IEnumerable<Animal>? seed = null) => _list = seed?.ToList() ?? [];
+        private readonly List<Animal> _list = seed?.ToList() ?? [];
+
         public Task AddAsync(Animal animal) { _list.Add(animal); return Task.CompletedTask; }
         public Task<IReadOnlyList<Animal>> ListAsync() => Task.FromResult((IReadOnlyList<Animal>)_list);
     }
 
-    private sealed class ListThingRepo : IThingRepository
+    private sealed class ListThingRepo(IEnumerable<Thing>? seed = null) : IThingRepository
     {
-        private readonly List<Thing> _list;
-        public ListThingRepo(IEnumerable<Thing>? seed = null) => _list = seed?.ToList() ?? [];
+        private readonly List<Thing> _list = seed?.ToList() ?? [];
+
         public Task AddAsync(Thing thing) { _list.Add(thing); return Task.CompletedTask; }
         public Task<IReadOnlyList<Thing>> ListAsync() => Task.FromResult((IReadOnlyList<Thing>)_list);
     }

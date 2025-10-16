@@ -44,10 +44,10 @@ public class InventoryUniquenessTests
     private sealed class NoopUow : IUnitOfWork { public Task SaveChangesAsync() => Task.CompletedTask; }
     private sealed class AlwaysAcceptClinic : IVeterinaryClinic
     { public AdmissionDecision Inspect(Animal _) => AdmissionDecision.Accept; }
-    private sealed class Policy : IInventoryPolicy
+    private sealed class Policy(IAnimalRepository a, IThingRepository t) : IInventoryPolicy
     {
-        private readonly IAnimalRepository _a; private readonly IThingRepository _t;
-        public Policy(IAnimalRepository a, IThingRepository t) { _a = a; _t = t; }
+        private readonly IAnimalRepository _a = a; private readonly IThingRepository _t = t;
+
         public async Task EnsureUniqueAsync(int number)
         {
             if ((await _a.ListAsync()).Any(x => x.Number == number) ||

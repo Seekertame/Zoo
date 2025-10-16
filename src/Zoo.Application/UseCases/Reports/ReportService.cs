@@ -3,22 +3,16 @@ using Zoo.Domain.Entities.Animals;
 
 namespace Zoo.Application.UseCases.Reports;
 
-public sealed class ReportService : IReportService
+public sealed class ReportService(IAnimalRepository animals, IThingRepository things) : IReportService
 {
-    private readonly IAnimalRepository _animals;
-    private readonly IThingRepository _things;
-
-    public ReportService(IAnimalRepository animals, IThingRepository things)
-    {
-        _animals = animals; _things = things;
-    }
+    private readonly IAnimalRepository _animals = animals;
+    private readonly IThingRepository _things = things;
 
     public async Task<int> GetTotalFoodKgPerDayAsync()
         => (await _animals.ListAsync()).Sum(a => a.FoodKgPerDay);
 
     public async Task<IReadOnlyList<Herbivore>> GetContactZooAsync()
-        => (await _animals.ListAsync()).OfType<Herbivore>()
-           .Where(h => h.IsContactZooAllowed).ToList();
+        => [.. (await _animals.ListAsync()).OfType<Herbivore>().Where(h => h.IsContactZooAllowed)];
 
     public async Task<IReadOnlyList<(string Title, int Number)>> GetInventoryAsync()
     {
