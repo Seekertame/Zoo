@@ -102,8 +102,8 @@ dotnet run --project src/Zoo.Presentation.Console
 dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults
 dotnet tool install --global dotnet-reportgenerator-globaltool
 reportgenerator -reports:"TestResults/**/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:HtmlSummary
-# открой coveragereport/index.html
 ```
+coverage написан в одной из первых строк .xml файла.
 
 ### Что именно покрыто тестами
 
