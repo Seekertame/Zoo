@@ -1,5 +1,4 @@
-# Zoo
-# Zoo — консольное приложение (C#/.NET)
+# Zoo - ERP-система
 
 Учебный проект по курсу «Конструирование ПО». Реализованы слои Domain / Application / Infrastructure / Presentation, внедрение зависимостей (DI), принципы SOLID, юнит-тесты и сбор покрытия.
 
@@ -37,31 +36,31 @@ Zoo/
 Ключевые use-case’ы:
 
 * **Приём животного**: `AdmissionService` → вызывает `IVeterinaryClinic` (решение Accept/Reject). Перед сохранением проверяет уникальность инв. номера через `IInventoryPolicy`.
-* **Отчёты**: `ReportService` — суммарный корм, «контактный зоопарк» (травоядные с добротой > 5), общий инвентарный список (животные + вещи).
+* **Отчёты**: `ReportService` - суммарный корм, «контактный зоопарк» (травоядные с добротой > 5), общий инвентарный список (животные + вещи).
 * **Добавление вещи**: `ThingService` — накрывает репозиторий, применяет политику уникальности и `UnitOfWork`.
 
 ---
 
 ## Где применены принципы SOLID (по делу, не «на словах»)
 
-* **S — Single Responsibility**
+* **S - Single Responsibility**
 
   * `AdmissionService` делает только приём животных.
-  * `ReportService` — только отчёты.
-  * `ThingService` — только команда добавления вещи.
+  * `ReportService` - только отчёты.
+  * `ThingService` - только команда добавления вещи.
     Это позволяет менять логику приёма, не трогая отчёты и наоборот.
 
-* **O — Open/Closed**
+* **O - Open/Closed**
   Добавить новый вид животного (`Giraffe : Herbivore`) или вещь (`Cage : Thing`) можно **без правок** сервисов: они работают через абстракции (`IAlive`, `IInventory`, репозитории). Фильтры отчётов используют общие свойства.
 
-* **L — Liskov Substitution**
+* **L - Liskov Substitution**
   `Herbivore` и `Predator` подставимы вместо `Animal` (инварианты не нарушаются, интерфейсы не «ослабляются»). Сервисы не знают конкретный подтип — опираются на контракт `Animal`.
 
-* **I — Interface Segregation**
+* **I - Interface Segregation**
   Узкие интерфейсы: `IAlive` (только потребление корма), `IInventory` (только инв. номер), отдельные `IAnimalRepository`, `IThingRepository`, `IVeterinaryClinic`, `IInventoryPolicy`. Никаких «толстых» бог-интерфейсов.
 
-* **D — Dependency Inversion**
-  Сервисы Application зависят от **абстракций**, а не реализаций: `IVeterinaryClinic`, `IInventoryPolicy`, `I*Repository`, `IUnitOfWork`. Реальные реализации (InMemory/Randomized) — в Infrastructure и подставляются через DI.
+* **D - Dependency Inversion**
+  Сервисы Application зависят от **абстракций**, а не реализаций: `IVeterinaryClinic`, `IInventoryPolicy`, `I*Repository`, `IUnitOfWork`. Реальные реализации (InMemory/Randomized) - в Infrastructure и подставляются через DI.
 
 ---
 
