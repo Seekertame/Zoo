@@ -1,6 +1,5 @@
 ﻿using Zoo.Application.Exceptions;
 using Zoo.Application.Interfaces;
-using Zoo.Application.UseCases.Inventory;
 using Zoo.Domain.Entities.Animals;
 using Zoo.Domain.Entities.Things;
 using Zoo.Presentation.Console.UI.Printers;

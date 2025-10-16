@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Zoo.Application.Exceptions;
+﻿using Zoo.Application.Exceptions;
 using Zoo.Application.Interfaces;
 
 namespace Zoo.Infrastructure.Policies;

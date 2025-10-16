@@ -1,8 +1,6 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Zoo.Domain.Entities.Animals;
 using Zoo.Domain.Entities.Things;
-using Xunit;
 
 namespace Zoo.Tests.Domain;
 

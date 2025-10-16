@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Zoo.Application.Interfaces;
 using Zoo.Application.UseCases.Reports;
 using Zoo.Domain.Entities.Animals;
 using Zoo.Domain.Entities.Things;
-using Xunit;
 
 namespace Zoo.Tests.Application;
 

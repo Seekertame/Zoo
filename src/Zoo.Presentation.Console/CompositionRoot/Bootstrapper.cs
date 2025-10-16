@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-// using Zoo.Infrastructure;
-// using Zoo.Infrastructure.DI;
 using Zoo.Presentation.Console.UI;
 using Zoo.Presentation.Console.UI.Printers;
 
