@@ -103,7 +103,7 @@ dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults
 dotnet tool install --global dotnet-reportgenerator-globaltool
 reportgenerator -reports:"TestResults/**/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:HtmlSummary
 ```
-coverage написан в одной из первых строк .xml файла.
+В Solution View папки сразу отображаться не будут. Надо зайти в fileExplorer, зайти там в coveragereport/summary.html (.html файл открыть например в Chrome).
 
 ### Что именно покрыто тестами
 
