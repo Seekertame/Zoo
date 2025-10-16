@@ -37,7 +37,7 @@ Zoo/
 
 * **Приём животного**: `AdmissionService` → вызывает `IVeterinaryClinic` (решение Accept/Reject). Перед сохранением проверяет уникальность инв. номера через `IInventoryPolicy`.
 * **Отчёты**: `ReportService` - суммарный корм, «контактный зоопарк» (травоядные с добротой > 5), общий инвентарный список (животные + вещи).
-* **Добавление вещи**: `ThingService` — накрывает репозиторий, применяет политику уникальности и `UnitOfWork`.
+* **Добавление вещи**: `ThingService` - накрывает репозиторий, применяет политику уникальности и `UnitOfWork`.
 
 ---
 
@@ -51,16 +51,16 @@ Zoo/
     Это позволяет менять логику приёма, не трогая отчёты и наоборот.
 
 * **O - Open/Closed**
-  Добавить новый вид животного (`Giraffe : Herbivore`) или вещь (`Cage : Thing`) можно **без правок** сервисов: они работают через абстракции (`IAlive`, `IInventory`, репозитории). Фильтры отчётов используют общие свойства.
+  Добавить новый вид животного (`Giraffe : Herbivore`) или вещь (`Cage : Thing`) можно без правок сервисов: они работают через абстракции (`IAlive`, `IInventory`, репозитории). Фильтры отчётов используют общие свойства.
 
 * **L - Liskov Substitution**
-  `Herbivore` и `Predator` подставимы вместо `Animal` (инварианты не нарушаются, интерфейсы не «ослабляются»). Сервисы не знают конкретный подтип — опираются на контракт `Animal`.
+  `Herbivore` и `Predator` подставимы вместо `Animal` (инварианты не нарушаются, интерфейсы не «ослабляются»). Сервисы не знают конкретный подтип - опираются на контракт `Animal`.
 
 * **I - Interface Segregation**
-  Узкие интерфейсы: `IAlive` (только потребление корма), `IInventory` (только инв. номер), отдельные `IAnimalRepository`, `IThingRepository`, `IVeterinaryClinic`, `IInventoryPolicy`. Никаких «толстых» бог-интерфейсов.
+  Узкие интерфейсы: `IAlive` (только потребление корма), `IInventory` (только инв. номер), отдельные `IAnimalRepository`, `IThingRepository`, `IVeterinaryClinic`, `IInventoryPolicy`. Никаких «толстых» ultimate-интерфейсов.
 
 * **D - Dependency Inversion**
-  Сервисы Application зависят от **абстракций**, а не реализаций: `IVeterinaryClinic`, `IInventoryPolicy`, `I*Repository`, `IUnitOfWork`. Реальные реализации (InMemory/Randomized) - в Infrastructure и подставляются через DI.
+  Сервисы Application зависят от абстракций, а не реализаций: `IVeterinaryClinic`, `IInventoryPolicy`, `I*Repository`, `IUnitOfWork`. Реальные реализации (InMemory/Randomized) - в Infrastructure и подставляются через DI.
 
 ---
 
@@ -131,7 +131,7 @@ reportgenerator -reports:"TestResults/**/coverage.cobertura.xml" -targetdir:"cov
 
 ### Почему coverage-отчёты удалены из репозитория
 
-HTML-отчёты (`coveragereport/`) и `TestResults/` — генерируемые артефакты, они «шумные», тяжёлые и меняются от запуска к запуску. Поэтому они добавлены в `.gitignore` и были удалены из репозитория.
+HTML-отчёты (`coveragereport/`) и `TestResults/` - генерируемые артефакты, они «шумные», тяжёлые и меняются от запуска к запуску. Поэтому они добавлены в `.gitignore` и были удалены из репозитория.
 
 Если нужно доказательство, то вот блок + скрин:
 ```xml
